@@ -132,8 +132,8 @@ a:hover { color: var(--accent); }
 
 /* Tým */
 .team { grid-template-columns: repeat(3, 1fr); gap: 32px; }
-.portrait { aspect-ratio: 4 / 5; background: #e6e2d9; display: grid; place-items: end center; overflow: hidden; margin-bottom: 20px; }
-.portrait svg { width: 78%; fill: #c6c0b3; display: block; }
+.portrait { aspect-ratio: 4 / 5; background: #e6e2d9; display: grid; place-items: center; overflow: hidden; margin-bottom: 20px; }
+.portrait span { font-family: var(--serif); font-size: 56px; letter-spacing: .06em; color: #a9a293; }
 .person img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; margin-bottom: 20px; display: block; filter: grayscale(1); }
 .person h3 { font-size: 21px; }
 .person .role { color: var(--accent); font-size: 14px; letter-spacing: .06em; text-transform: uppercase; font-weight: 600; margin: 4px 0 10px; }
