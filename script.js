@@ -2,6 +2,21 @@
 (function () {
   'use strict';
 
+  // Texty, které vypisuje skript, podle jazyka stránky (<html lang="cs"> nebo "en").
+  var TEXTY = {
+    cs: {
+      none: 'zatím nezvoleno', only: 'pouze nezbytné', base: 'nezbytné', analytics: 'analytické', marketing: 'marketingové',
+      err: 'Vyplňte prosím jméno, platný e-mail a zprávu.',
+      ok: 'Děkujeme, zpráva by nyní dorazila do schránky kanceláře. V tomto návrhu se nic neodesílá.'
+    },
+    en: {
+      none: 'not chosen yet', only: 'necessary only', base: 'necessary', analytics: 'analytics', marketing: 'marketing',
+      err: 'Please fill in your name, a valid e-mail address and a message.',
+      ok: 'Thank you. Your message would now arrive in our inbox. Nothing is sent in this draft.'
+    }
+  };
+  var T = TEXTY[document.documentElement.lang] || TEXTY.cs;
+
   // --- Mobilní menu ---
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.getElementById('hlavni-menu');
@@ -39,11 +54,11 @@
   function render() {
     bar.hidden = !!current;
     if (!stateEl) return;
-    if (!current) { stateEl.textContent = 'zatím nezvoleno'; return; }
+    if (!current) { stateEl.textContent = T.none; return; }
     var on = [];
-    if (current.analytics) on.push('analytické');
-    if (current.marketing) on.push('marketingové');
-    stateEl.textContent = on.length ? 'nezbytné, ' + on.join(', ') : 'pouze nezbytné';
+    if (current.analytics) on.push(T.analytics);
+    if (current.marketing) on.push(T.marketing);
+    stateEl.textContent = on.length ? T.base + ', ' + on.join(', ') : T.only;
   }
   function openDialog() {
     form.elements.analytics.checked = !!(current && current.analytics);
@@ -86,12 +101,12 @@
     });
     if (firstBad) {
       status.className = 'form-status err';
-      status.textContent = 'Vyplňte prosím jméno, platný e-mail a zprávu.';
+      status.textContent = T.err;
       firstBad.focus();
       return;
     }
     status.className = 'form-status ok';
-    status.textContent = 'Děkujeme, zpráva by nyní dorazila do schránky kanceláře. V tomto návrhu se nic neodesílá.';
+    status.textContent = T.ok;
     contact.reset();
   });
 })();
